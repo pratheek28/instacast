@@ -1,0 +1,54 @@
+body {
+    font-family: 'Pacifico', cursive;
+    margin: 0;
+    padding: 0;
+    background-image: url("matching2.png");
+    background-repeat: no-repeat;
+    background-size: cover; 
+    background-position: center 0px; 
+    background-attachment: fixed;
+    overflow-x: hidden; 
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 902px;
+    height: 100vh; 
+    margin: 0;
+}
+
+.dislike {
+    background-image: url("dislike.png");
+    background-position: -20px center ;
+    background-repeat: no-repeat;
+    background-size: 246px;
+    width: 220px;
+    height: 220px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: 75px;
+}
+
+.like{
+    background-image: url("like.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 235px;
+    width: 220px;
+    height: 220px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: 75px;
+}
+
+.dislike:hover {
+    transform: scale(1.1); 
+}
+
+.like:hover {
+    transform: scale(1.1); 
+}
