@@ -1,0 +1,26 @@
+const emailData = {
+        email: "pranavgowrish@gmail.com", //replace with actor email
+        studioemail: "studioemail@gmail.com",
+        role: "Role",
+        movie: "movie",
+        studio: "Star Studio Name",
+        name: "User's Name",
+        status: "status",
+      };
+
+      const handleSubmit2 = () => {
+        fetch('http://127.0.0.1:8000/sendEmailDec', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(emailData), // Send data as an object with topic
+        })
+          .then((response) => response.json())
+          .then((data) => {})
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+      };
+
+      handleSubmit2(); // Submit the data to the backend
