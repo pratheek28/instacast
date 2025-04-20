@@ -64,30 +64,16 @@ body {
     position: absolute;
     left: 35%;
     top: 20%;
-    /* animation: move-left 2.5s ease-in-out 0s 1 normal forwards; */
-    animation-play-state: paused;
 }
 
-@keyframes move-right {
-    0%{
-        transform: translateX(0) rotateZ(0deg);
-    }
-    50%{
-        transform: translateX(50vw) rotateZ(22.5deg);
-    }
-    100%{
-        transform: translateX(100vw) rotateZ(45deg);
-    }
+.swipeLeft {
+    transform: translateX(-150vw) rotate(-25deg);
+    transition: transform 1s ease-in-out, opacity 0.8s ease-in-out;
+    opacity: 0;
 }
-
-@keyframes move-left {
-    0%{
-        transform: translateX(0) rotateZ(0deg);
-    }
-    50%{
-        transform: translateX(-50vw) rotateZ(-22.5deg);
-    }
-    100%{
-        transform: translateX(-100vw) rotateZ(-45deg);
-    }
+  
+.swipeRight {
+    transform: translateX(150vw) rotate(25deg);
+    transition: transform 1s ease-in-out, opacity 0.8s ease-in-out;
+    opacity: 0;
 }
