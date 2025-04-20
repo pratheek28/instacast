@@ -1,11 +1,8 @@
 import React, {useState} from 'react';
 import styles from "./signup.module.css";
 
-
-
 function SignUp() {
     let userType = "";
-
     const[base64String, setBase64String] = useState("");
 
     const[actorFormData, setActorFormData] = useState({
@@ -205,6 +202,11 @@ function SignUp() {
 
                 <div>
                     <input type="password" id="studioPass" name="studioPass" placeholder="123-456-7890"/>
+                </div>
+
+                {/*change TO STUDIO submit button logic here*/}
+                <div>
+                    <button type="submit" onClick={handleActorSubmit}>Submit! </button>
                 </div>
             </div>
 
