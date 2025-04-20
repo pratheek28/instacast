@@ -1,19 +1,13 @@
-import React, { useRef } from 'react';
-import styles from './actormatching.module.css';
+import React, { useState } from 'react';
+import styles from './ActorMatching.module.css';
 
 function ActorMatching() {
-    const boxRef = useRef(null);
+    const [swipeDirection, setSwipeDirection] = useState('');
 
-    const playAnimation = (animationName) => {
-        if (boxRef.current) {
-            console.log("Button is clicked:", animationName);
-            boxRef.current.style.animation = 'none';
+    const handleSwipe = (direction) => {
+        setSwipeDirection(direction);
 
-            requestAnimationFrame(() => {
-                void boxRef.current.offsetWidth; // Trigger reflow
-                boxRef.current.style.animation = `${animationName} 2.5s ease-in-out forwards`;
-            });
-        }
+        setTimeout(() => setSwipeDirection(''), 800);
     };
 
     return (
@@ -21,19 +15,17 @@ function ActorMatching() {
             <div className={styles.container}>
                 <button
                     className={styles.dislike}
-                    id="dislike"
-                    name="dislike"
-                    onClick={() => playAnimation('move-left')} // Attach onClick handler
+                    onClick={() => handleSwipe('swipeLeft')}
                 ></button>
                 <button
                     className={styles.like}
-                    id="like"
-                    name="like"
-                    onClick={() => playAnimation('move-right')} // Attach onClick handler
+                    onClick={() => handleSwipe('swipeRight')}
                 ></button>
             </div>
 
-            <div className={styles.tempBox} ref={boxRef}></div>
+            <div
+                className={`${styles.tempBox} ${swipeDirection ? styles[swipeDirection] : ''}`}
+            ></div>
         </div>
     );
 }
