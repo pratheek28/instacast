@@ -1,7 +1,7 @@
 fastapi
-uvicorn[standard]
-bcrypt
+uvicorn
 pydantic
 astrapy
+bcrypt
 sib-api-v3-sdk
-os
+python-dotenv  # optional, but useful for managing API keys/secrets
