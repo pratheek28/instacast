@@ -8,8 +8,11 @@ function ActorMatching() {
             <button className={styles.dislike}> </button>
             <button className={styles.like}> </button>
         </div>
+        <div>
+            <button className={styles.dashboard}>  </button>
+        </div>
     </div>
-
+    
 
    )
 }
