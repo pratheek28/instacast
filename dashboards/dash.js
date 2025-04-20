@@ -17,85 +17,80 @@ const DashBoard = () => {
   const [Age, setAge] = useState('NA');
   const [Intro, setIntro] = useState('NA');
 
-  const[roles,setRoles]=useState([]);
-  const[movie,setMovie]=useState([]);
-  const[studio,setStudio]=useState([]);
-  const[status,setStatus]=useState([]);
-
+  const [roles, setRoles] = useState([]);
+  const [movie, setMovie] = useState([]);
+  const [studio, setStudio] = useState([]);
+  const [status, setStatus] = useState([]);
 
   useEffect(() => {
     const data = '';
 
     const handleSubmit = () => {
-        fetch('http://127.0.0.1:8000/getActorDash', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ topic: data }), // Send data as an object with topic
+      fetch('http://127.0.0.1:8000/getActorDash', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ topic: data }), // Send data as an object with topic
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          console.log('data location:', data.location);
+          setName(data.name);
+          setpfp(data.pfp);
+          setGenres(data.genres);
+          setLocation(data.location);
+          setNumber(data.phone);
+          setGender(data.gender);
+          setAge(data.age);
+          setIntro(data.intro);
+          setEmail(data.email);
+          setWeight(data.weight);
+          setHeight(data.height);
         })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-            console.log('data location:', data.location);
-            setName(data.name);
-            setpfp(data.pfp);
-            setGenres(data.genres);
-            setLocation(data.location);
-            setNumber(data.phone);
-            setGender(data.gender);
-            setAge(data.age);
-            setIntro(data.intro);
-            setEmail(data.email);
-            setWeight(data.weight);
-            setHeight(data.height);
-          })
-          .catch((error) => {
-            console.error('Error:', error);
-          });
-      };
-  
-      handleSubmit(); // Submit the data to the backend
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    };
 
+    handleSubmit(); // Submit the data to the backend
 
+    const data2 = {
+      email: 'pratheek0928@gmail.com',
+    };
+    const handleSubmit2 = () => {
+      fetch('http://127.0.0.1:8000/getActorRoles', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data2), // Send data as an object with topic
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // Separate each field from the list of role objects
+          const Role = data.map((match) => match.role);
+          const Movie = data.map((match) => match.movie);
+          const Studio = data.map((match) => match.studio);
+          const Status = data.map((match) => match.status);
 
-      const data2 = {
-        email: "pratheek0928@gmail.com",
-      };  
-            const handleSubmit2 = () => {
-        fetch('http://127.0.0.1:8000/getActorRoles', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data2), // Send data as an object with topic
+          // Set them into their respective state arrays
+          setRoles(Role);
+          setMovie(Movie);
+          setStudio(Studio);
+          setStatus(Status);
         })
-          .then((response) => response.json())
-          .then((data) => {
-            // Separate each field from the list of role objects
-const Role = data.map(match => match.role);
-const Movie = data.map(match => match.movie);
-const Studio = data.map(match => match.studio);
-const Status = data.map(match => match.status);
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    };
 
-// Set them into their respective state arrays
-setRoles(Role);
-setMovie(Movie);
-setStudio(Studio);
-setStatus(Status);
-
-          })
-          .catch((error) => {
-            console.error('Error:', error);
-          });
-      };
-  
-      handleSubmit2(); // Submit the data to the backend
+    handleSubmit2(); // Submit the data to the backend
   }, []);
 
   const openResume = () => {
     setShowResume(true);
-    
   };
 
   const resumeData = {
@@ -273,82 +268,83 @@ setStatus(Status);
           overflowY: 'auto', // optional scroll if they exceed vertically
         }}
       >
-
-{roles.length === 0 ? (
+        {roles.length === 0 ? (
           <div
             style={{ textAlign: 'center', color: 'white', fontSize: '16px' }}
           >
             <b>Start by Swiping in the Matching System!</b>
           </div>
         ) : (
-        Array.from(roles).map((iroles, i) => (
+          Array.from(roles).map((iroles, i) => (
             <div
-            key={i}
-            style={{
-              background:
-                'linear-gradient(135deg,rgb(238, 89, 131), #764ba2)',
-              width: '210px',
-              height: '297px',
-              borderRadius: '12px',
-              color: 'white',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexDirection: 'column',
-              justifyContent: 'space-evenly',
-              padding: '10px',
-            }}
-          >
-            <div
+              key={i}
               style={{
-                backgroundColor: 'rgba(255, 255, 255, 0.2)', // Light background for text box
-                padding: '8px',
-                borderRadius: '8px',
-                marginBottom: '12px', // Space between the boxes
-                width: '90%',
-                textAlign: 'center',
+                background:
+                  'linear-gradient(135deg,rgb(238, 89, 131), #764ba2)',
+                width: '210px',
+                height: '297px',
+                borderRadius: '12px',
+                color: 'white',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'column',
+                justifyContent: 'space-evenly',
+                padding: '10px',
               }}
             >
-              <b>{iroles}</b>
+              <div
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.2)', // Light background for text box
+                  padding: '8px',
+                  borderRadius: '8px',
+                  marginBottom: '12px', // Space between the boxes
+                  width: '90%',
+                  textAlign: 'center',
+                }}
+              >
+                <b>{iroles}</b>
+              </div>
+              <div
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                  padding: '8px',
+                  borderRadius: '8px',
+                  marginBottom: '12px',
+                  width: '90%',
+                  textAlign: 'center',
+                }}
+              >
+                <b>Movie: </b>
+                {movie[i]}
+              </div>
+              <div
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                  padding: '8px',
+                  borderRadius: '8px',
+                  marginBottom: '12px',
+                  width: '90%',
+                  textAlign: 'center',
+                }}
+              >
+                <b>Studio: </b>
+                {studio[i]}
+              </div>
+              <div
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                  padding: '8px',
+                  borderRadius: '8px',
+                  textAlign: 'center',
+                  width: '90%',
+                }}
+              >
+                <b>Status: </b> {status[i]}
+              </div>
             </div>
-            <div
-              style={{
-                backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                padding: '8px',
-                borderRadius: '8px',
-                marginBottom: '12px',
-                width: '90%',
-                textAlign: 'center',
-              }}
-            >
-              <b>Movie: </b>{movie[i]}
-            </div>
-            <div
-              style={{
-                backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                padding: '8px',
-                borderRadius: '8px',
-                marginBottom: '12px',
-                width: '90%',
-                textAlign: 'center',
-              }}
-            >
-              <b>Studio: </b>{studio[i]}
-            </div>
-            <div
-              style={{
-                backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                padding: '8px',
-                borderRadius: '8px',
-                textAlign: 'center',
-                width: '90%',
-              }}
-            >
-              <b>Status: </b> {status[i]}
-            </div>
-          </div>
-        )))}
-
+          ))
+        )}
       </div>
     </div>
   );
