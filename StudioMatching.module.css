@@ -67,3 +67,16 @@ body {
     height: 64px; 
     cursor: pointer;
 }
+
+
+.swipeLeft {
+    transform: translateX(-150vw) rotate(-25deg);
+    transition: transform 1s ease-in-out, opacity 0.8s ease-in-out;
+    opacity: 0;
+}
+  
+.swipeRight {
+    transform: translateX(150vw) rotate(25deg);
+    transition: transform 1s ease-in-out, opacity 0.8s ease-in-out;
+    opacity: 0;
+}
