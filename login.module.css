@@ -1,0 +1,42 @@
+.container{
+    position: absolute;
+    background: rgb(255, 255, 255);
+    
+    left: 10vw;
+    top: 20vh;
+
+    height: 65vh;
+    width: 80vw;
+    background-color: rgb(0, 209, 224);
+    overflow-y: auto;
+    border-radius: 10px;
+}
+
+.formcontainer {
+    position: relative;
+    left: 40%;
+    top: 5%;
+}
+
+
+.formcontainer input{
+    position: relative;
+    left: 43.5%;
+    margin-top: 10%;
+    margin-left: 3%;
+
+}
+
+.formcontainer label {
+    position: relative;
+    left: 37%;
+    text-align: left;
+}
+
+.actorInputField {
+    display: none;
+}
+
+.studioInputField {
+    display: none;
+}
