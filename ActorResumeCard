@@ -1,0 +1,90 @@
+{/* Resume Content */}
+        <div>
+          <div style={{ display: 'flex', gap: '24px', marginTop: '25px' }}>
+            <img
+              src={resumeData.headshot}
+              alt="Headshot"
+              style={{
+                width: '160px',
+                height: '160px',
+                objectFit: 'cover',
+                borderRadius: '50%', // Makes it circular
+                boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+              }}
+            />
+            <div>
+              <h1
+                style={{
+                  fontSize: '28px',
+                  fontWeight: 'bold',
+                  marginBottom: '4px',
+                }}
+              >
+                {resumeData.name}
+              </h1>
+              <p style={{ fontSize: '14px', color: '#555' }}>
+                ({resumeData.gender}, {resumeData.age}yo)
+              </p>
+              <p
+                style={{ color: '#444', marginBottom: '4px', fontSize: '15px' }}
+              >
+                📧 {resumeData.contact}
+              </p>
+              <p
+                style={{ color: '#444', marginBottom: '4px', fontSize: '15px' }}
+              >
+                📞 {resumeData.number}
+              </p>
+              <p style={{ fontSize: '14px', color: '#666' }}>
+                Height: {resumeData.height} | Weight: {resumeData.weight}
+              </p>
+            </div>
+          </div>
+
+          <div style={{ marginTop: '24px' }}>
+            <h2
+              style={{
+                fontSize: '18px',
+                fontWeight: '600',
+                marginBottom: '12px',
+              }}
+            >
+              Intro
+            </h2>
+            <p style={{ fontSize: '14px', color: '#333' }}>
+              {resumeData.intro}
+            </p>
+          </div>
+
+          <div style={{ marginTop: '24px' }}>
+            <h2
+              style={{
+                fontSize: '18px',
+                fontWeight: '600',
+                marginBottom: '12px',
+              }}
+            >
+              Interests
+            </h2>
+
+            {/* Center aligned text */}
+            <p style={{ fontSize: '14px', color: '#333', textAlign: 'center' }}>
+              {resumeData.genres.join(', ')}
+            </p>
+          </div>
+
+          <div style={{ marginTop: '24px' }}>
+            <h2
+              style={{
+                fontSize: '18px',
+                fontWeight: '600',
+                marginBottom: '12px',
+              }}
+            >
+              Location
+            </h2>
+            <p style={{ fontSize: '14px', color: '#333' }}>
+              {resumeData.location}
+            </p>
+          </div>
+        </div>
