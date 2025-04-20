@@ -4,3 +4,4 @@ bcrypt
 pydantic
 astrapy
 sib-api-v3-sdk
+os
