@@ -12,9 +12,15 @@ import time
 import sib_api_v3_sdk
 from sib_api_v3_sdk.rest import ApiException
 from pprint import pprint
+import os
+
+
+SIB_KEY = os.environ.get("SIB_KEY")
+ASTRA_TOKEN = os.environ.get("ASTRA_TOKEN")
+
 
 configuration = sib_api_v3_sdk.Configuration()
-configuration.api_key['api-key'] = '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'
+configuration.api_key['api-key'] = SIB_KEY
 
 
 app = FastAPI()
@@ -27,7 +33,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-TOKEN = "AstraCS:cKZBYYDdfssheZOePSlCzXtc:7357d8ce24e22e95b74c1e7b06649292de437c63ddcfbe8e6d70cfbe6c107e4e"
+TOKEN = ASTRA_TOKEN
 client = DataAPIClient(TOKEN)
 db = client.get_database_by_api_endpoint(
   "https://fe697207-2f4a-4f43-b461-d75e29646c3a-us-east-2.apps.astra.datastax.com"
