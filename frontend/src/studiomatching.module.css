@@ -1,0 +1,143 @@
+/* body {
+    font-family: 'Pacifico', cursive;
+    margin: 0;
+    padding: 0;
+    background-image: url("/public/matching.png");
+    background-repeat: no-repeat;
+    background-size: cover; 
+    background-position: center 0px; 
+    background-attachment: fixed;
+    overflow-x: hidden; 
+} */
+
+.container {
+    font-family: 'Pacifico', cursive;
+    margin: 0;
+    padding: 0;
+    background-image: url("/public/matching.png");
+    background-repeat: no-repeat;
+    background-size: cover; 
+    background-position: center 0px; 
+    background-attachment: fixed;
+    overflow-x: hidden; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 902px;
+    height: 100vh; 
+    margin: 0;
+}
+
+.dislike {
+    background-image: url("/public/dislike.png");
+    background-color: white;
+    background-position: -20px center ;
+    background-repeat: no-repeat;
+    background-size: 246px;
+    width: 220px;
+    height: 220px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: 75px;
+}
+
+.like{
+    background-image: url("/public/like.png");
+    background-color: white;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 235px;
+    width: 220px;
+    height: 220px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: 75px;
+}
+
+.dislike:hover {
+    transform: scale(1.1); 
+}
+
+.like:hover {
+    transform: scale(1.1); 
+}
+
+.tempBox {
+    background-color: rgba(255, 255, 255, 0.92);
+    height: 75vh;
+    width: 420px;
+    aspect-ratio: 210 / 297;
+    border: 6px solid rgb(0, 0, 0);
+    border-radius: 12px;
+    position: absolute;
+    left: 35%;
+    top: 20%;
+    animation-play-state: paused;
+    align-items: center;
+    overflow-y: auto;
+    box-shadow: 0px, 8px, 30px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    
+
+    /* animation: move-left 2.5s ease-in-out 0s 1 normal forwards; */
+    /* background: white;
+    color: black;
+    border-radius: 12px;
+    padding: 24px;
+    width: 420px;
+    max-width: 420px;
+    aspect-ratio: 210 / 297;
+    left: 35%;
+    top: 20%;
+    max-height: 75vh;
+    overflow-y: auto;
+    box-shadow: 0px, 8px, 30px rgba(0, 0, 0, 0.4); */
+}
+
+.swipeLeft {
+    transform: translateX(-150vw) rotate(-25deg);
+    transition: transform 3s ease-in-out, opacity 0.8s ease-in-out;
+    opacity: 0;
+}
+  
+.swipeRight {
+    transform: translateX(150vw) rotate(25deg);
+    transition: transform 3s ease-in-out, opacity 0.8s ease-in-out;
+    opacity: 0;
+}
+
+.revert {
+    background-color: transparent;
+    position: absolute;
+    width: 130px;
+    height: 100px;
+    left: 45.7%;
+    top: 4.5%;
+}
+
+@keyframes move-right {
+    0%{
+        transform: translateX(0) rotateZ(0deg);
+    }
+    50%{
+        transform: translateX(50vw) rotateZ(22.5deg);
+    }
+    100%{
+        transform: translateX(100vw) rotateZ(45deg);
+    }
+}
+
+@keyframes move-left {
+    0%{
+        transform: translateX(0) rotateZ(0deg);
+    }
+    50%{
+        transform: translateX(-50vw) rotateZ(-22.5deg);
+    }
+    100%{
+        transform: translateX(-100vw) rotateZ(-45deg);
+    }
+}
