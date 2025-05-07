@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Page,
   Text,
@@ -6,17 +6,17 @@ import {
   Document,
   StyleSheet,
   Image,
-} from '@react-pdf/renderer';
+} from "@react-pdf/renderer";
 
 // Styles for the PDF layout
 const styles = StyleSheet.create({
   page: {
     padding: 30,
     fontSize: 12,
-    fontFamily: 'Helvetica',
-    alignItems: 'center',
-    textAlign: 'center',
-    backgroundColor: '#f0f0f5', // light grayish-blue background
+    fontFamily: "Helvetica",
+    alignItems: "center",
+    textAlign: "center",
+    backgroundColor: "#f0f0f5", // light grayish-blue background
   },
   headshot: {
     width: 120,
@@ -37,34 +37,34 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 10,
   },
   info: {
     fontSize: 12,
-    color: '#444',
+    color: "#444",
     marginBottom: 8,
   },
   section: {
     marginTop: 16,
-    width: '100%',
-    alignItems: 'center',
+    width: "100%",
+    alignItems: "center",
   },
   sectionTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 6,
   },
   sectionText: {
     fontSize: 14,
-    color: '#555',
-    textAlign: 'center',
+    color: "#555",
+    textAlign: "center",
     marginBottom: 10,
   },
   interests: {
     fontSize: 14,
-    color: '#555',
-    textAlign: 'center',
+    color: "#555",
+    textAlign: "center",
     marginTop: 10,
   },
 });
@@ -99,7 +99,7 @@ const ActorResumePDF = ({ data }) => (
       {data.genres?.length > 0 && (
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Interests</Text>
-          <Text style={styles.interests}>{data.genres.join(', ')}</Text>
+          <Text style={styles.interests}>{data.genres.join(", ")}</Text>
         </View>
       )}
 

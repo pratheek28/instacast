@@ -1,53 +1,53 @@
-import React, { useRef, useState, useEffect } from 'react';
-import './center.css';
-import { PDFDownloadLink } from '@react-pdf/renderer';
-import ResumeModal from './resume';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import "./center.css";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import ResumeModal from "./resume";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const DashBoard = () => {
-    const location = useLocation();
-    const navigate = useNavigate();
+  const location = useLocation();
+  const navigate = useNavigate();
 
-    const user = location.state?.user;
+  const user = location.state?.user;
+  const localStorageUser = JSON.parse(localStorage.getItem("user"));
+
   const [showResume, setShowResume] = useState(false); // <-- this controls the popup
-  const [Name, setName] = useState('No Name');
-  const [Contact, setEmail] = useState('NA');
-  const [Height, setHeight] = useState('NA');
-  const [Weight, setWeight] = useState('NA');
-  const [Headshot, setpfp] = useState('NA');
+  const [Name, setName] = useState("No Name");
+  const [Contact, setEmail] = useState("NA");
+  const [Height, setHeight] = useState("NA");
+  const [Weight, setWeight] = useState("NA");
+  const [Headshot, setpfp] = useState("NA");
   const [Genres, setGenres] = useState([]);
-  const [Location, setLocation] = useState('NA');
-  const [Number, setNumber] = useState('NA');
-  const [Gender, setGender] = useState('NA');
-  const [Age, setAge] = useState('NA');
-  const [Intro, setIntro] = useState('NA');
+  const [Location, setLocation] = useState("NA");
+  const [Number, setNumber] = useState("NA");
+  const [Gender, setGender] = useState("NA");
+  const [Age, setAge] = useState("NA");
+  const [Intro, setIntro] = useState("NA");
 
   const [roles, setRoles] = useState([]);
   const [movie, setMovie] = useState([]);
   const [studio, setStudio] = useState([]);
   const [status, setStatus] = useState([]);
 
-  const data = '';
-
+  const data = "";
   const data2 = {
-    email: user.email,
+    email: user?.email || localStorageUser?.email || "NA",
   };
 
   useEffect(() => {
-    
-
+    if (!user && !localStorageUser) {
+      return navigate("/");
+    }
     const handleSubmit = () => {
-      fetch('https://instacast.onrender.com/getActorDash', {
-        method: 'POST',
+      fetch("https://instacast.onrender.com/getActorDash", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(data2), // Send data as an object with topic
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
-          console.log('data location:', data.location);
           setName(data.name);
           setpfp(data.pfp);
           setGenres(data.genres);
@@ -61,18 +61,17 @@ const DashBoard = () => {
           setHeight(data.height);
         })
         .catch((error) => {
-          console.error('Error:', error);
+          console.error("Error:", error);
         });
     };
 
     handleSubmit(); // Submit the data to the backend
 
-    
     const handleSubmit2 = () => {
-      fetch('https://instacast.onrender.com/getActorRoles', {
-        method: 'POST',
+      fetch("https://instacast.onrender.com/getActorRoles", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(data2), // Send data as an object with topic
       })
@@ -91,7 +90,7 @@ const DashBoard = () => {
           setStatus(Status);
         })
         .catch((error) => {
-          console.error('Error:', error);
+          console.error("Error:", error);
         });
     };
 
@@ -118,24 +117,27 @@ const DashBoard = () => {
   };
 
   const handleRedirectMatch = (event) => {
-    navigate("/ActorMatching", {state: {data2: data2}});
+    navigate("/ActorMatching", { state: { data2: data2 } });
   };
 
+  const handleLogOut = (event) => {
+    localStorage.removeItem("user");
+    navigate("/");
+  };
 
   return (
     <div>
-    
       <div className="middle-box">
         {/* Top Half: 50% height */}
         <div
           style={{
             flex: 1,
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '0 24px',
+            width: "100%",
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "0 24px",
             //borderBottom: '1px solid rgba(255,255,255,0.3)',
           }}
         >
@@ -143,23 +145,23 @@ const DashBoard = () => {
           <div
             style={{
               flex: 1,
-              textAlign: 'center',
-              color: 'black',
-              flexDirection: 'columnn',
+              textAlign: "center",
+              color: "black",
+              flexDirection: "columnn",
             }}
           >
             <div
               style={{
-                backgroundColor: 'rgba(255, 255, 255, 0.2)', // Light background for text box
-                padding: '8px',
-                borderRadius: '8px',
-                marginBottom: '12px', // Space between the boxes
-                marginLeft: '100px',
-                gap: '10px',
-                flexDirection: 'column',
-                width: '65%',
-                textAlign: 'center',
-                display: 'flex',
+                backgroundColor: "rgba(255, 255, 255, 0.2)", // Light background for text box
+                padding: "8px",
+                borderRadius: "8px",
+                marginBottom: "12px", // Space between the boxes
+                marginLeft: "100px",
+                gap: "10px",
+                flexDirection: "column",
+                width: "65%",
+                textAlign: "center",
+                display: "flex",
               }}
             >
               <div>
@@ -174,32 +176,32 @@ const DashBoard = () => {
               <div
                 style={{
                   flex: 1,
-                  width: '100%',
-                  flexWrap: 'wrap', // 👈 allow wrapping
-                  display: 'flex',
+                  width: "100%",
+                  flexWrap: "wrap", // 👈 allow wrapping
+                  display: "flex",
                   //justifyContent: 'space-evenly',
-                  alignItems: 'left',
-                  padding: '5px',
-                  gap: '5px',
-                  overflowY: 'auto', // optional scroll if they exceed vertically
-                  maxHeight: '100px', // 👈 limit the vertical height here
+                  alignItems: "left",
+                  padding: "5px",
+                  gap: "5px",
+                  overflowY: "auto", // optional scroll if they exceed vertically
+                  maxHeight: "100px", // 👈 limit the vertical height here
                 }}
               >
                 {Array.from(Genres).map((genre, i) => (
                   <div
                     key={i}
                     style={{
-                      background: 'rgba(17, 49, 230, 0.5)', // Semi-transparent
-                      width: '100px',
-                      height: '3px',
-                      borderRadius: '5px',
-                      color: 'black',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flexDirection: 'column',
-                      padding: '10px',
-                      marginBottom: '8px', // spacing between bars
+                      background: "rgba(17, 49, 230, 0.5)", // Semi-transparent
+                      width: "100px",
+                      height: "3px",
+                      borderRadius: "5px",
+                      color: "black",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexDirection: "column",
+                      padding: "10px",
+                      marginBottom: "8px", // spacing between bars
                     }}
                   >
                     {genre}
@@ -213,21 +215,21 @@ const DashBoard = () => {
           <div
             style={{
               flex: 1,
-              display: 'flex',
-              justifyContent: 'center',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '10px',
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "10px",
             }}
           >
             <img
               src={Headshot}
               alt="User Profile"
               style={{
-                height: '200px',
-                width: '200px',
-                borderRadius: '50%',
-                objectFit: 'cover',
+                height: "200px",
+                width: "200px",
+                borderRadius: "50%",
+                objectFit: "cover",
               }}
             />
             <h2>
@@ -236,31 +238,33 @@ const DashBoard = () => {
           </div>
 
           {/* Right Text */}
-          <div style={{ flex: 1, textAlign: 'center', color: 'black' }}>
+          <div style={{ flex: 1, textAlign: "center", color: "black" }}>
             <button
               onClick={() => openResume()}
               style={{
-                background: 'linear-gradient(to right, #764ba2, #e84a5f)',
-                color: 'white',
-                border: 'none',
-                borderRadius: '8px',
-                padding: '10px 20px',
-                fontSize: '16px',
-                cursor: 'pointer',
-                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-                transition: 'transform 0.2s, box-shadow 0.2s',
+                background: "linear-gradient(to right, #764ba2, #e84a5f)",
+                color: "white",
+                border: "none",
+                borderRadius: "8px",
+                padding: "10px 20px",
+                fontSize: "16px",
+                cursor: "pointer",
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                transition: "transform 0.2s, box-shadow 0.2s",
               }}
               onMouseOver={(e) => {
-                e.currentTarget.style.transform = 'scale(1.05)';
-                e.currentTarget.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.3)';
+                e.currentTarget.style.transform = "scale(1.05)";
+                e.currentTarget.style.boxShadow =
+                  "0 6px 12px rgba(0, 0, 0, 0.3)";
               }}
               onMouseOut={(e) => {
-                e.currentTarget.style.transform = 'scale(1)';
-                e.currentTarget.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+                e.currentTarget.style.transform = "scale(1)";
+                e.currentTarget.style.boxShadow =
+                  "0 4px 8px rgba(0, 0, 0, 0.2)";
               }}
             >
               View Resume
-            </button>{' '}
+            </button>{" "}
           </div>
         </div>
         {/* Resume Modal */}
@@ -274,19 +278,19 @@ const DashBoard = () => {
         <div
           style={{
             flex: 1,
-            width: '100%',
-            flexWrap: 'wrap', // 👈 allow wrapping
-            display: 'flex',
-            justifyContent: 'space-evenly',
-            alignItems: 'left',
-            padding: '24px',
-            gap: '24px',
-            overflowY: 'auto', // optional scroll if they exceed vertically
+            width: "100%",
+            flexWrap: "wrap", // 👈 allow wrapping
+            display: "flex",
+            justifyContent: "space-evenly",
+            alignItems: "left",
+            padding: "24px",
+            gap: "24px",
+            overflowY: "auto", // optional scroll if they exceed vertically
           }}
         >
           {roles.length === 0 ? (
             <div
-              style={{ textAlign: 'center', color: 'white', fontSize: '16px' }}
+              style={{ textAlign: "center", color: "white", fontSize: "16px" }}
             >
               <b>Start by Swiping in the Matching System!</b>
             </div>
@@ -296,39 +300,39 @@ const DashBoard = () => {
                 key={i}
                 style={{
                   background:
-                    'linear-gradient(135deg,rgb(238, 89, 131), #764ba2)',
-                  width: '210px',
-                  height: '297px',
-                  borderRadius: '12px',
-                  color: 'white',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexDirection: 'column',
-                  justifyContent: 'space-evenly',
-                  padding: '10px',
+                    "linear-gradient(135deg,rgb(238, 89, 131), #764ba2)",
+                  width: "210px",
+                  height: "297px",
+                  borderRadius: "12px",
+                  color: "white",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                  justifyContent: "space-evenly",
+                  padding: "10px",
                 }}
               >
                 <div
                   style={{
-                    backgroundColor: 'rgba(255, 255, 255, 0.2)', // Light background for text box
-                    padding: '8px',
-                    borderRadius: '8px',
-                    marginBottom: '12px', // Space between the boxes
-                    width: '90%',
-                    textAlign: 'center',
+                    backgroundColor: "rgba(255, 255, 255, 0.2)", // Light background for text box
+                    padding: "8px",
+                    borderRadius: "8px",
+                    marginBottom: "12px", // Space between the boxes
+                    width: "90%",
+                    textAlign: "center",
                   }}
                 >
                   <b>{iroles}</b>
                 </div>
                 <div
                   style={{
-                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                    padding: '8px',
-                    borderRadius: '8px',
-                    marginBottom: '12px',
-                    width: '90%',
-                    textAlign: 'center',
+                    backgroundColor: "rgba(255, 255, 255, 0.2)",
+                    padding: "8px",
+                    borderRadius: "8px",
+                    marginBottom: "12px",
+                    width: "90%",
+                    textAlign: "center",
                   }}
                 >
                   <b>Movie: </b>
@@ -336,12 +340,12 @@ const DashBoard = () => {
                 </div>
                 <div
                   style={{
-                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                    padding: '8px',
-                    borderRadius: '8px',
-                    marginBottom: '12px',
-                    width: '90%',
-                    textAlign: 'center',
+                    backgroundColor: "rgba(255, 255, 255, 0.2)",
+                    padding: "8px",
+                    borderRadius: "8px",
+                    marginBottom: "12px",
+                    width: "90%",
+                    textAlign: "center",
                   }}
                 >
                   <b>Studio: </b>
@@ -349,11 +353,11 @@ const DashBoard = () => {
                 </div>
                 <div
                   style={{
-                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                    padding: '8px',
-                    borderRadius: '8px',
-                    textAlign: 'center',
-                    width: '90%',
+                    backgroundColor: "rgba(255, 255, 255, 0.2)",
+                    padding: "8px",
+                    borderRadius: "8px",
+                    textAlign: "center",
+                    width: "90%",
                   }}
                 >
                   <b>Status: </b> {status[i]}
@@ -365,7 +369,14 @@ const DashBoard = () => {
       </div>
 
       <div>
-        <button className="renderMatching" onClick={handleRedirectMatch}>Click Me!</button>
+        <button className="renderMatching" onClick={handleRedirectMatch} />
+      </div>
+
+      <div>
+        <button className="logout" onClick={handleLogOut}>
+          {" "}
+          Log Out!{" "}
+        </button>
       </div>
     </div>
   );

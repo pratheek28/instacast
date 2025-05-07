@@ -579,5 +579,5 @@ def updateMatchDb(data: receivedData):
 
 
 
-#uvicorn main:app --reload --port 8000 ----->> To run the backend
+#uvicorn app:app --reload --port 8000 ----->> To run the backend
 #python3 -m pip install fastapi uvicorn

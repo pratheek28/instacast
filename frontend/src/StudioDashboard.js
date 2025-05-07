@@ -1,14 +1,14 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import './center.css';
-import $ from 'jquery';
+import React, { useRef, useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import "./center.css";
+import $ from "jquery";
 
 const SDashBoard = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
   const user = location.state?.user;
-  
+
   const [movie, setMovie] = useState([]);
   const [role, setRole] = useState([]);
   const [gender, setGender] = useState([]);
@@ -16,26 +16,25 @@ const SDashBoard = () => {
   const [plot, setPlot] = useState([]);
   const [genres, setGenres] = useState([]);
 
-  const [email, setEmail] = useState('NA');
-  const [manager, setManager] = useState('NA');
-  const [number, setNumber] = useState('NA');
-  const [studio, setStudio] = useState('NA');
-  const [studioID, setStudioID] = useState('NA');
+  const [email, setEmail] = useState("NA");
+  const [manager, setManager] = useState("NA");
+  const [number, setNumber] = useState("NA");
+  const [studio, setStudio] = useState("NA");
+  const [studioID, setStudioID] = useState("NA");
 
-  const data = '';
+  const data = "";
   const data2 = {
     email: user.studioemail,
   };
-  
+
   useEffect(() => {
-    
-    console.log(user.studioemail, 'TEST!!!!');
+    console.log(user.studioemail, "TEST!!!!");
 
     const handleSubmit = () => {
-      fetch('https://instacast.onrender.com/getStudioDash', {
-        method: 'POST',
+      fetch("https://instacast.onrender.com/getStudioDash", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(data2), // Send data as an object with topic
       })
@@ -48,17 +47,17 @@ const SDashBoard = () => {
           setStudioID(data.uid);
         })
         .catch((error) => {
-          console.error('Error:', error);
+          console.error("Error:", error);
         });
     };
 
     handleSubmit(); // Submit the data to the backend
 
     const handleSubmit2 = () => {
-      fetch('https://instacast.onrender.com/getRoles', {
-        method: 'POST',
+      fetch("https://instacast.onrender.com/getRoles", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(data2), // Send data as an object with topic
       })
@@ -81,7 +80,7 @@ const SDashBoard = () => {
           setGenres(genresList);
         })
         .catch((error) => {
-          console.error('Error:', error);
+          console.error("Error:", error);
         });
     };
 
@@ -89,8 +88,8 @@ const SDashBoard = () => {
   }, []);
 
   const createRole = () => {
-    if ($('#createRoleModal').length) {
-      $('#createRoleModal').fadeIn();
+    if ($("#createRoleModal").length) {
+      $("#createRoleModal").fadeIn();
       return;
     }
 
@@ -307,14 +306,14 @@ const SDashBoard = () => {
           </div>
         `;
 
-    $('body').append(modalHtml);
-    $('#createRoleModal').fadeIn();
+    $("body").append(modalHtml);
+    $("#createRoleModal").fadeIn();
 
-    $('.closeRoleBtn').on('click', function () {
-      $('#createRoleModal').fadeOut();
+    $(".closeRoleBtn").on("click", function () {
+      $("#createRoleModal").fadeOut();
     });
 
-    $('#roleForm').on('submit', function (e) {
+    $("#roleForm").on("submit", function (e) {
       e.preventDefault();
 
       const Movie = $('input[name="movie"]').val();
@@ -347,29 +346,29 @@ const SDashBoard = () => {
       };
 
       const handleSubmit = () => {
-        fetch('https://instacast.onrender.com/putNewRoles', {
-          method: 'POST',
+        fetch("https://instacast.onrender.com/putNewRoles", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(roleData), // Send data as an object with topic
         })
           .then((response) => response.json())
           .then((data) => {})
           .catch((error) => {
-            console.error('Error:', error);
+            console.error("Error:", error);
           });
       };
 
       handleSubmit(); // Submit the data to the backend
 
-      $('#createRoleModal').fadeOut();
+      $("#createRoleModal").fadeOut();
     });
   };
 
   const handleRedirectMatch = () => {
-    navigate("/StudioMatching", {state: {data2: data2}});
-  }
+    navigate("/StudioMatching", { state: { data2: data2 } });
+  };
 
   return (
     <div>
@@ -378,12 +377,12 @@ const SDashBoard = () => {
         <div
           style={{
             flex: 1,
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '0 24px',
+            width: "100%",
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "0 24px",
             //borderBottom: '1px solid rgba(255,255,255,0.3)',
           }}
         >
@@ -391,23 +390,23 @@ const SDashBoard = () => {
           <div
             style={{
               flex: 1,
-              textAlign: 'center',
-              color: 'black',
-              flexDirection: 'columnn',
+              textAlign: "center",
+              color: "black",
+              flexDirection: "columnn",
             }}
           >
             <div
               style={{
-                backgroundColor: 'rgba(255, 255, 255, 0.2)', // Light background for text box
-                padding: '8px',
-                borderRadius: '8px',
-                marginBottom: '12px', // Space between the boxes
-                marginLeft: '100px',
-                gap: '10px',
-                flexDirection: 'column',
-                width: '65%',
-                textAlign: 'center',
-                display: 'flex',
+                backgroundColor: "rgba(255, 255, 255, 0.2)", // Light background for text box
+                padding: "8px",
+                borderRadius: "8px",
+                marginBottom: "12px", // Space between the boxes
+                marginLeft: "100px",
+                gap: "10px",
+                flexDirection: "column",
+                width: "65%",
+                textAlign: "center",
+                display: "flex",
               }}
             >
               <div>
@@ -429,11 +428,11 @@ const SDashBoard = () => {
           <div
             style={{
               flex: 1,
-              display: 'flex',
-              justifyContent: 'center',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '10px',
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "10px",
             }}
           >
             <h1>
@@ -444,36 +443,36 @@ const SDashBoard = () => {
           <div
             style={{
               flex: 1,
-              textAlign: 'center',
-              color: 'black',
-              flexDirection: 'columnn',
+              textAlign: "center",
+              color: "black",
+              flexDirection: "columnn",
             }}
           >
             <button
               onClick={() => createRole()}
               style={{
-                background: 'linear-gradient(135deg, #6e8efb, #a777e3)',
-                border: 'none',
-                color: 'white',
-                padding: '12px 24px',
-                borderRadius: '999px',
-                fontSize: '16px',
-                fontWeight: '600',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease-in-out',
-                boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                background: "linear-gradient(135deg, #6e8efb, #a777e3)",
+                border: "none",
+                color: "white",
+                padding: "12px 24px",
+                borderRadius: "999px",
+                fontSize: "16px",
+                fontWeight: "600",
+                cursor: "pointer",
+                transition: "all 0.3s ease-in-out",
+                boxShadow: "0 4px 15px rgba(0,0,0,0.2)",
               }}
               onMouseEnter={(e) => {
-                e.target.style.transform = 'scale(1.05)';
-                e.target.style.boxShadow = '0 6px 20px rgba(0,0,0,0.3)';
+                e.target.style.transform = "scale(1.05)";
+                e.target.style.boxShadow = "0 6px 20px rgba(0,0,0,0.3)";
               }}
               onMouseLeave={(e) => {
-                e.target.style.transform = 'scale(1)';
-                e.target.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
+                e.target.style.transform = "scale(1)";
+                e.target.style.boxShadow = "0 4px 15px rgba(0,0,0,0.2)";
               }}
             >
               Create Movie Role
-            </button>{' '}
+            </button>{" "}
           </div>
         </div>
 
@@ -481,20 +480,20 @@ const SDashBoard = () => {
         <div
           style={{
             flex: 2,
-            width: '100%',
-            flexWrap: 'wrap', // 👈 allow wrapping
-            display: 'flex',
-            justifyContent: 'space-evenly',
-            alignItems: 'left',
-            padding: '24px',
-            gap: '24px',
-            overflowY: 'auto', // optional scroll if they exceed vertically
+            width: "100%",
+            flexWrap: "wrap", // 👈 allow wrapping
+            display: "flex",
+            justifyContent: "space-evenly",
+            alignItems: "left",
+            padding: "24px",
+            gap: "24px",
+            overflowY: "auto", // optional scroll if they exceed vertically
           }}
         >
           {/* Two A4-ish rectangles */}
           {role.length === 0 ? (
             <div
-              style={{ textAlign: 'center', color: 'white', fontSize: '16px' }}
+              style={{ textAlign: "center", color: "white", fontSize: "16px" }}
             >
               <b>Start by Creating a New Movie Role!</b>
             </div>
@@ -504,27 +503,27 @@ const SDashBoard = () => {
                 key={i}
                 style={{
                   background:
-                    'linear-gradient(135deg,rgb(238, 89, 131), #764ba2)',
-                  width: '210px',
-                  height: '297px',
-                  borderRadius: '12px',
-                  color: 'white',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexDirection: 'column',
-                  justifyContent: 'space-evenly',
-                  padding: '10px',
+                    "linear-gradient(135deg,rgb(238, 89, 131), #764ba2)",
+                  width: "210px",
+                  height: "297px",
+                  borderRadius: "12px",
+                  color: "white",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                  justifyContent: "space-evenly",
+                  padding: "10px",
                 }}
               >
                 <div
                   style={{
-                    backgroundColor: 'rgba(255, 255, 255, 0.2)', // Light background for text box
-                    padding: '8px',
-                    borderRadius: '8px',
-                    marginBottom: '12px', // Space between the boxes
-                    width: '90%',
-                    textAlign: 'center',
+                    backgroundColor: "rgba(255, 255, 255, 0.2)", // Light background for text box
+                    padding: "8px",
+                    borderRadius: "8px",
+                    marginBottom: "12px", // Space between the boxes
+                    width: "90%",
+                    textAlign: "center",
                   }}
                 >
                   <b>Role: </b>
@@ -532,12 +531,12 @@ const SDashBoard = () => {
                 </div>
                 <div
                   style={{
-                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                    padding: '8px',
-                    borderRadius: '8px',
-                    marginBottom: '12px',
-                    width: '90%',
-                    textAlign: 'center',
+                    backgroundColor: "rgba(255, 255, 255, 0.2)",
+                    padding: "8px",
+                    borderRadius: "8px",
+                    marginBottom: "12px",
+                    width: "90%",
+                    textAlign: "center",
                   }}
                 >
                   <b>Movie: </b>
@@ -545,11 +544,11 @@ const SDashBoard = () => {
                 </div>
                 <div
                   style={{
-                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                    padding: '8px',
-                    borderRadius: '8px',
-                    textAlign: 'center',
-                    width: '90%',
+                    backgroundColor: "rgba(255, 255, 255, 0.2)",
+                    padding: "8px",
+                    borderRadius: "8px",
+                    textAlign: "center",
+                    width: "90%",
                   }}
                 >
                   <b>Gender: </b>
@@ -557,23 +556,23 @@ const SDashBoard = () => {
                 </div>
                 <div
                   style={{
-                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                    padding: '8px',
-                    borderRadius: '8px',
-                    textAlign: 'center',
-                    width: '90%',
+                    backgroundColor: "rgba(255, 255, 255, 0.2)",
+                    padding: "8px",
+                    borderRadius: "8px",
+                    textAlign: "center",
+                    width: "90%",
                   }}
                 >
                   <button
-                    onClick={() => alert('Edit not supported yet!')}
+                    onClick={() => alert("Edit not supported yet!")}
                     style={{
-                      width: '100%', // Makes the button take full width of its container
-                      padding: '8px',
-                      borderRadius: '5px',
-                      border: '2px solidrgb(7, 113, 32)', // Green border
-                      backgroundColor: 'transparent', // Makes the background transparent
-                      color: '#28a745', // Green text
-                      cursor: 'pointer',
+                      width: "100%", // Makes the button take full width of its container
+                      padding: "8px",
+                      borderRadius: "5px",
+                      border: "2px solidrgb(7, 113, 32)", // Green border
+                      backgroundColor: "transparent", // Makes the background transparent
+                      color: "#28a745", // Green text
+                      cursor: "pointer",
                     }}
                   >
                     <b>Edit</b>
@@ -585,9 +584,10 @@ const SDashBoard = () => {
         </div>
       </div>
 
-
       <div>
-        <button className="renderMatching" onClick={handleRedirectMatch}>Click Me!</button>
+        <button className="renderMatching" onClick={handleRedirectMatch}>
+          Click Me!
+        </button>
       </div>
     </div>
   );
