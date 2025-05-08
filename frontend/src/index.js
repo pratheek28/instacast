@@ -1,20 +1,19 @@
-import React from 'react';
+import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import SignUp from './SignUp';
-import LogIn from './LogIn';
-import ActorMatching from './ActorMatching';
-import StudioMatching from './StudioMatching';
-import reportWebVitals from './reportWebVitals';
- 
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import SignUp from "./SignUp";
+import LogIn from "./LogIn";
+import ActorMatching from "./ActorMatching";
+import StudioMatching from "./StudioMatching";
+import reportWebVitals from "./reportWebVitals";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-  <App />
-  </BrowserRouter>
+    <App />
+  </BrowserRouter>,
 );
 
 // If you want to start measuring performance in your app, pass a function
