@@ -8,6 +8,7 @@ const SDashBoard = () => {
   const navigate = useNavigate();
 
   const user = location.state?.user;
+  const localStorageUser = JSON.parse(localStorage.getItem("studioemail"));
 
   const [movie, setMovie] = useState([]);
   const [role, setRole] = useState([]);
@@ -24,11 +25,13 @@ const SDashBoard = () => {
 
   const data = "";
   const data2 = {
-    email: user.studioemail,
+    email: user?.studioemail || localStorageUser?.studioemail || "N/A",
   };
 
   useEffect(() => {
-    console.log(user.studioemail, "TEST!!!!");
+    if (!user && !localStorageUser) {
+      return navigate("/");
+    }
 
     const handleSubmit = () => {
       fetch("https://instacast.onrender.com/getStudioDash", {
@@ -370,6 +373,16 @@ const SDashBoard = () => {
     navigate("/StudioMatching", { state: { data2: data2 } });
   };
 
+  const handleLogOut = () => {
+    localStorage.removeItem("studioemail");
+    try {
+      localStorage.removeItem("user");
+    } catch (error) {
+      console.error("Error removing user from localStorage:", error);
+    }
+    navigate("/");
+  };
+
   return (
     <div>
       <div className="middle-box">
@@ -585,8 +598,14 @@ const SDashBoard = () => {
       </div>
 
       <div>
-        <button className="renderMatching" onClick={handleRedirectMatch}>
-          Click Me!
+        <button
+          className="renderMatching"
+          onClick={handleRedirectMatch}
+        ></button>
+      </div>
+      <div>
+        <button className="logout" onClick={handleLogOut}>
+          Log Out!
         </button>
       </div>
     </div>
