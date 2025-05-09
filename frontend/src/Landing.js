@@ -4,8 +4,16 @@ import { useNavigate } from "react-router-dom";
 
 function Landing() {
   // need to handle login/signup button logic
+  const actorObj = JSON.parse(localStorage.getItem("user"));
+  const studioObj = JSON.parse(localStorage.getItem("studioemail"));
+
   const navigate = useNavigate();
   useEffect(() => {
+    if (actorObj) {
+      navigate("/dash");
+    } else if (studioObj) {
+      navigate("/sdashboard");
+    }
     document.body.className = "landing";
     return () => {
       document.body.className = ""; // cleanup when unmounting

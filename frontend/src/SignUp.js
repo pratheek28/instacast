@@ -6,10 +6,13 @@ function SignUp() {
   const navigate = useNavigate();
   let userType = "";
   const localStorageUser = JSON.parse(localStorage.getItem("user"));
+  const studioObj = JSON.parse(localStorage.getItem("studioemail"));
 
   useEffect(() => {
     if (localStorageUser) {
       navigate("/dash", { state: { user: localStorageUser } });
+    } else if (studioObj) {
+      navigate("/sdashboard", { state: { studioemail: studioObj } });
     }
   }, []);
 

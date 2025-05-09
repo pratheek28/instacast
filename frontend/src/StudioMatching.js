@@ -6,6 +6,7 @@ function StudioMatching() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const localStorageUser = JSON.parse(localStorage.getItem("studioemail"));
   const data2 = location.state?.data2;
 
   const [firstname, setFirstName] = useState([]);
@@ -114,6 +115,9 @@ function StudioMatching() {
   };
 
   useEffect(() => {
+    if (!data2 && !localStorageUser) {
+      return navigate("/");
+    }
     console.log("Data2: ", data2);
     const handleSubmit = () => {
       fetch("https://instacast.onrender.com/getSwipedActors", {
@@ -169,6 +173,12 @@ function StudioMatching() {
 
   return (
     <div>
+      <div>
+        <button
+          className={styles.back}
+          onClick={() => navigate("/sdashboard")}
+        />
+      </div>
       <div className={styles.container}>
         <button
           className={styles.dislike}

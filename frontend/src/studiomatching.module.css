@@ -124,6 +124,24 @@
   top: 4.5%;
 }
 
+.back {
+  background: transparent;
+  position: absolute;
+  top: 3.4%;
+  left: 45.5%;
+  font-size: 1.2rem;
+  font-family: "Pacifico", cursive;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  width: 9vw;
+  height: 11.9vh;
+}
+
+.back:hover {
+  cursor: pointer;
+}
+
 @keyframes move-right {
   0% {
     transform: translateX(0) rotateZ(0deg);

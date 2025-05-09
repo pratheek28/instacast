@@ -179,7 +179,8 @@ def actorLogIn(data: ActorLogInData):
                     "phonenum": existingUser[0]["phonenum"],
                     "lastname": existingUser[0]["lastname"],
                     "location": existingUser[0]["location"],
-                    "pfp": existingUser[0]["pfp"]
+                    "pfp": existingUser[0]["pfp"],
+                    "type": "actor"
                 }
             }
             return JSONResponse(response)
@@ -571,7 +572,9 @@ def updateMatchDb(data: receivedData):
 
 
 
-
+@app.post("/keepactive")
+def active():
+    return JSONResponse("activated")
 
 
 

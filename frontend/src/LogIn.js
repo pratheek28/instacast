@@ -6,11 +6,31 @@ function LogIn() {
   const [response, setResponse] = useState("");
   const navigate = useNavigate();
   let userType = "";
-  const localStorageUser = JSON.parse(localStorage.getItem("user"));
+  let localStorageUser = null;
+  try {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser && storedUser !== "undefined") {
+      localStorageUser = JSON.parse(storedUser);
+    }
+  } catch (e) {
+    console.error("Error parsing localStorage user:", e);
+  }
+
+  let localStorageStudio = null;
+  try {
+    const storedStudio = localStorage.getItem("studioemail");
+    if (storedStudio && storedStudio !== "undefined") {
+      localStorageStudio = JSON.parse(storedStudio);
+    }
+  } catch (e) {
+    console.error("Error parsing localStorage studio:", e);
+  }
 
   useEffect(() => {
     if (localStorageUser) {
       navigate("/dash", { state: { user: localStorageUser } });
+    } else if (localStorageStudio) {
+      navigate("/sdashboard", { state: { user: localStorageStudio } });
     }
   }, []);
 
@@ -68,7 +88,6 @@ function LogIn() {
       .then((data) => {
         setResponse(data.message);
         if (data.message.includes("Success")) {
-          console.log("test", data.user);
           localStorage.setItem("user", JSON.stringify(data.user));
           navigate("/dash", { state: { user: data.user } });
         }
@@ -86,6 +105,14 @@ function LogIn() {
       .then((response) => response.json())
       .then((data) => {
         if (data.message.includes("Success")) {
+          const localStorageMessage = {
+            studioemail: data.studioemail,
+            type: "studio",
+          };
+          localStorage.setItem(
+            "studioemail",
+            JSON.stringify(localStorageMessage),
+          );
           navigate("/SDashboard", {
             state: { user: { studioemail: data.studioemail } },
           });
