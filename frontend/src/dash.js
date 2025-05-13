@@ -122,6 +122,11 @@ const DashBoard = () => {
 
   const handleLogOut = (event) => {
     localStorage.removeItem("user");
+    try {
+      localStorage.removeItem("studioemail");
+    } catch (error) {
+      console.error("Error:", error);
+    }
     navigate("/");
   };
 
